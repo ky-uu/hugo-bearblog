@@ -1,0 +1,37 @@
+{{ define "main" }}
+<content>
+  {{ if .Data.Singular }}
+  <h1 style="margin-bottom:0">Filtered as <span style="text-shadow: 2px 2px 1px var(--cyan), 2px -1px 1px var(--magenta), -2px 1px 1px var(--yellow);">{{ .Title | lower }}</span></h1>
+  {{ end }}
+
+  {{ $currentYear := "" }}
+  {{ range .Pages }}
+    {{ $postYear := .Date.Format "2006" }}
+    {{ if ne $postYear $currentYear }}
+      {{ if ne $currentYear "" }}
+        </ul>
+      {{ end }}
+      <h1>{{ $postYear }}</h1>
+      <ul class="blog-posts">
+      {{ $currentYear = $postYear }}
+    {{ end }}
+    <li>
+      <span>
+        <time datetime='{{( .Date.Format "02 January" | lower )}}'>
+          {{( .Date.Format (default "02 January" .Site.Params.dateFormat) | lower )}}
+        </time>
+      </span>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+    </li>
+  {{ else }}
+    <ul class="blog-posts">
+      <li>
+        No posts yet
+      </li>
+    </ul>
+  {{ end }}
+  {{ if gt (len .Pages) 0 }}
+    </ul>
+  {{ end }}
+</content>
+{{ end }}

@@ -1,0 +1,16 @@
+<a href="{{ "" | relURL }}"  class="title">rendez-vous</a>
+<!-- {{ with .Site.GetPage "/blog" }} -->
+{{ with .Site.GetPage (printf "/%s/blog" .Language.Lang) | default (.Site.GetPage "/blog") }}
+    <a href="{{ .RelPermalink }}">blog</a>
+{{ end }}
+<!-- {{ end }} -->
+<a href="{{ "portal" | relURL }}">portal</a>
+{{ if hugo.IsMultilingual }}
+    {{ if not .IsHome }}
+        {{ range .AllTranslations }}
+            {{ if ne .Language.Lang $.Language.Lang }}
+            <a href="{{ .RelPermalink }}" onclick="localStorage.setItem('preferred-lang', '{{ .Language.Lang }}')">{{ if eq .Language.Lang "en" }}🔄 english{{ else if eq .Language.Lang "ko" }}🔄 한국어{{ end }}</a>
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
