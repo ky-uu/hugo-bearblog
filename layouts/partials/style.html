@@ -303,20 +303,31 @@
         height: auto !important;
     }
     #statuscafe-username {
-        display: block;
+        display: inline;
         color: var(--text-color);
         background-color: var(--background-color);
-        padding: 0px 5px;
-        max-width: 100%;
+        padding: 0px 1.5px;
         font-style: italic;
-        width: fit-content;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+    }
+    #statuscafe-username a {
+        color: var(--link-color);
+        cursor: pointer;
+        text-decoration: none;
+        text-shadow: none;
+        font-weight: bold;
+    }
+    #statuscafe-username::after {
+    content: "\A";
+    white-space: pre;
     }
     #statuscafe-content {
-        display: inline-block;
+        display: inline;
         color: var(--text-color);
         background-color: var(--background-color);
-        padding: 0px 5px;
-        max-width: 100%;
-        width: fit-content;
+        padding: 0px 1.5px;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
     }
 </style>
